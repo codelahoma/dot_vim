@@ -361,6 +361,8 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+" This mapping along with mapping ; to : allows for quick save with ;w;
+cnoremap w; w<CR>
 " }}}
 
 " source current file
