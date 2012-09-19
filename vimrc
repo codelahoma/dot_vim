@@ -48,6 +48,10 @@ Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
 
+" Scala
+Bundle 'bdd/vim-scala'
+
+
 " vimscripts.org
 
 Bundle 'EasyMotion'
@@ -370,7 +374,7 @@ nnoremap <leader>sf :source %<cr>
 
 nnoremap H 0
 "nnoremap L $
-nnoremap  -- <C-^>
+nnoremap  <leader><leader> <C-^>
 nnoremap <leader>vp :execute "rightbelow vsplit " . bufname("#")<cr>" 
 nnoremap L      :nohlsearch<cr><c-l>
 
