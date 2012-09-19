@@ -38,6 +38,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'xolox/vim-session'
 " Bundle 'vim-scripts/vim-pad'
 Bundle 'hsitz/VimOrganizer'
+Bundle 'vim-scripts/Align'
 
 " Language Additions
 "  Ruby
@@ -47,6 +48,13 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
+
+" Javascript
+Bundle 'pangloss/vim-javascript'
+Bundle 'jelera/vim-javascript-syntax'
+
+" Coffeescript
+Bundle 'kchmck/vim-coffee-script'
 
 " vimscripts.org
 
@@ -181,6 +189,12 @@ set dictionary=~/.vim/words
 filetype plugin indent on
 " }}}
 
+" UltiSnips configuration"{{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"}}}
+
 " Manage vimrc ---------------------------------------- {{{
 nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -205,9 +219,9 @@ function! NumberToggle()
 	endif
 endfunc
 
-nnoremap <C-n> :call NumberToggle()<cr>
-inoremap <C-n> :call NumberToggle()<cr>
-vnoremap <C-n> :call NumberToggle()<cr>
+" nnoremap <C-n> :call NumberToggle()<cr>
+" inoremap <C-n> :call NumberToggle()<cr>
+" vnoremap <C-n> :call NumberToggle()<cr>
 
 autocmd FocusLost   * :set number
 autocmd FocusGained * :set relativenumber
@@ -370,7 +384,7 @@ nnoremap <leader>sf :source %<cr>
 
 nnoremap H 0
 "nnoremap L $
-nnoremap  -- <C-^>
+nnoremap  ,, <C-^>
 nnoremap <leader>vp :execute "rightbelow vsplit " . bufname("#")<cr>" 
 nnoremap L      :nohlsearch<cr><c-l>
 
@@ -394,6 +408,9 @@ map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
 nnoremap <c-x>s :w<cr>
 nnoremap <c-x>c :wq<cr>
+
+" Hide/Show NERDTree
+nnoremap <f2> :NERDTreeToggle<cr>
 
 " }}}
 
