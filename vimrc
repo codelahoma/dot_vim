@@ -1,7 +1,7 @@
 " Rod Knowlton's vimrc
 "
 " Copy at your own risk.
-" 
+"
 " Use Vim settings. Must run before other settings
 set nocompatible
 
@@ -39,6 +39,7 @@ Bundle 'xolox/vim-session'
 " Bundle 'vim-scripts/vim-pad'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
+Bundle 'kakkyz81/evervim'
 
 " Language Additions
 "  Ruby
@@ -74,7 +75,7 @@ filetype plugin indent on
 
 
 " Org Mode  ----------------------------------------"{{{
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org            call org#SetOrgFileType()
 " let g:org_capture_file = '~/org_files/mycaptures.org'
 command! OrgCapture :call org#CaptureBuffer()
@@ -102,7 +103,7 @@ set number
 set ruler
 set scrolloff=5
 set tildeop
-set visualbell 
+set visualbell
 syntax on
 
 " Text Formatting
@@ -139,9 +140,9 @@ set statusline=%.20F                     " Path to the file
 set statusline+=%m                       " modified flag
 set statusline+=\                        " Separator
 set statusline+=%y                       " File type
-set statusline+=\                        " Separator 
+set statusline+=\                        " Separator
 set statusline+=%{rvm#statusline()}      " Current Ruby version
-set statusline+=\                        " Separator 
+set statusline+=\                        " Separator
 set statusline+=%{fugitive#statusline()} " Git information
 set statusline+=%=                       " Switch to the right side
 set statusline+=(%c)                     " column number
@@ -277,7 +278,7 @@ nnoremap <silent> <leader>bdm :Sbdm<cr>
 " }}}
 
 " operator pending remaps --------------------{{{
-" (i)n and (a)round (n)ext or (l)ast 
+" (i)n and (a)round (n)ext or (l)ast
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
 onoremap an( :<c-u>normal! f(va(<cr>
@@ -313,7 +314,7 @@ nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>m :CtrlPMRUFiles<cr>
 
 " operator pending remaps --------------------{{{
-" (i)n and (a)round (n)ext or (l)ast 
+" (i)n and (a)round (n)ext or (l)ast
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
 onoremap an( :<c-u>normal! f(va(<cr>
@@ -389,7 +390,7 @@ nnoremap <leader>sf :source %<cr>
 nnoremap H 0
 "nnoremap L $
 nnoremap  <leader><leader> <C-^>
-nnoremap <leader>vp :execute "rightbelow vsplit " . bufname("#")<cr>" 
+nnoremap <leader>vp :execute "rightbelow vsplit " . bufname("#")<cr>"
 nnoremap L      :nohlsearch<cr><c-l>
 
 " always search magically
@@ -458,7 +459,7 @@ noremap  <Right> <nop>
 
       au BufRead,BufNewFile *.txt call s:setupWrapping()
     augroup END
-    
+
     function! s:setupWrapping()
       set wrap
       set wm=2
@@ -488,6 +489,16 @@ function! ToggleFoldWithNoHL()
 endfunction
 
 nnoremap <silent> <space> :nohlsearch<cr>:call ToggleFoldWithNoHL()<cr>
+
+function! StripWhiteSpace()
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
+endfunction
+
+noremap <leader>ss :call StripWhiteSpace()<CR>
 "}}}
 
 
