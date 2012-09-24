@@ -9,7 +9,11 @@ let g:ft_ignore_pat = '\.org'
 
 " Vundle----------------------------------------"{{{
 filetype off
-set rtp+=~/.vim/bundle/vundle
+if has('win32')
+  set rtp+=~/vimfiles/bundle/vundle
+else
+  set rtp+=~/.vim/bundle/vundle
+endif
 call vundle#rc()
 
 " github repos
@@ -140,9 +144,11 @@ set statusline=%.20F                     " Path to the file
 set statusline+=%m                       " modified flag
 set statusline+=\                        " Separator
 set statusline+=%y                       " File type
-set statusline+=\                        " Separator
-set statusline+=%{rvm#statusline()}      " Current Ruby version
-set statusline+=\                        " Separator
+set statusline+=\                        " Separator 
+if !has('win32')
+  set statusline+=%{rvm#statusline()}      " Current Ruby version
+endif
+set statusline+=\                        " Separator 
 set statusline+=%{fugitive#statusline()} " Git information
 set statusline+=%=                       " Switch to the right side
 set statusline+=(%c)                     " column number
@@ -201,7 +207,11 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "}}}
 
 " Manage vimrc ---------------------------------------- {{{
-nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
+if has('win32')
+  nnoremap <leader>ev :execute "edit ~/vimfiles/vimrc"<cr>
+else
+  nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
+endif
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " }}}
 
