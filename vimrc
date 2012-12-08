@@ -72,6 +72,7 @@ Bundle 'ZoomWin'
 Bundle 'ctrlp.vim'
 Bundle 'dbext.vim'
 Bundle 'matchit.zip'
+Bundle 'ack.vim'
 
 filetype plugin indent on
 
@@ -281,6 +282,9 @@ nnoremap <leader>ig :IndentGuidesToggle<cr>
 
 " Give Y a consistent behavior
 nnoremap Y y$
+
+" Toggle NERDTree
+nnoremap <leader>t :NERDTreeToggle<cr>
 
 " Smart Buffer Delete mappings -------------------- {{{
 nnoremap <silent> <leader>bd  :Sbd<cr>
