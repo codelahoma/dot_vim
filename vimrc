@@ -28,7 +28,7 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'orftz/sbd.vim'
 Bundle 'programble/itchy.vim'
-Bundle 'roman/golden-ratio'
+" Bundle 'roman/golden-ratio'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
@@ -44,6 +44,13 @@ Bundle 'xolox/vim-session'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
 Bundle 'kakkyz81/evervim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'chrisbra/NrrwRgn'
+Bundle 'tpope/vim-speeddating'
+Bundle 'jceb/vim-orgmode'
+Bundle 'utl.vim'
+Bundle 'calendar.vim'
+
 
 " Language Additions
 "  Ruby
@@ -72,6 +79,8 @@ Bundle 'ZoomWin'
 Bundle 'ctrlp.vim'
 Bundle 'dbext.vim'
 Bundle 'matchit.zip'
+Bundle 'ack.vim'
+Bundle 'WebAPI.vim'
 
 filetype plugin indent on
 
@@ -156,10 +165,14 @@ set statusline+=%l                       " Current line
 set statusline+=/                        " Separator
 set statusline+=%L                       " Total Lines
 
+" Abbreviations - fixing my common typos
+abbreviate ): );
+
 " Font selection
 if has('gui_running')
   if !has('win32')
-    set guifont=Menlo:h18
+    " set guifont=Menlo:h18
+    set guifont=Source\ Code\ Pro:h18
   else
     set guifont=Consolas:h14
   endif
@@ -177,12 +190,16 @@ set modelines=10
 
 " Default color scheme
 " if has('win32') || !has('gui_running')
-" 	colorscheme blackboard
+" 	colorscheme slate
 " else
 " 	colorscheme solarized
 " endif
 "
 colorscheme jellybeans
+
+if !has('gui_running')
+  colorscheme slate
+endif
 
 " vim-pad directory
 
@@ -204,6 +221,11 @@ filetype plugin indent on
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"}}}
+
+" NERDTree options {{{
+
+let NERDTreeQuitOnOpen=1
 "}}}
 
 " Manage vimrc ---------------------------------------- {{{
@@ -234,7 +256,7 @@ function! NumberToggle()
 	endif
 endfunc
 
-" nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <C-n> :call NumberToggle()<cr>
 " inoremap <C-n> :call NumberToggle()<cr>
 " vnoremap <C-n> :call NumberToggle()<cr>
 
@@ -259,7 +281,9 @@ vnoremap <leader>' c''<esc>hpl
 " from http://www.ktaylor.name/2009/11/vim-screen-lisp-programming-environment.html
 " vnoremap <C-c><C-c> :ScreenSend<cr>
 " nnoremap <C-c><C-c> vip:ScreenSend<cr>
-"
+
+" NERDTreeToggle
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 " keep search pattern at the center of the screen (http://vimbits.com/bits/92)
 nnoremap <silent> n nzz
@@ -271,10 +295,10 @@ nnoremap <silent> g# g#zz
 
 
 " navigate windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
 
 " Indent guides
 nnoremap <leader>ig :IndentGuidesToggle<cr>
@@ -306,10 +330,12 @@ onoremap al[ :<c-u>normal! F]va[<cr>
 " }}}
 
 " Automatically re-indent on paste -------------------- {{{
-nnoremap <leader>p p
-nnoremap <leader>P p
-nnoremap p p`[v`]=
-nnoremap P P`[v`]=
+" nnoremap <leader>p p
+" nnoremap <leader>P p
+"
+" nnoremap <leader>p p`[v`]=
+" nnoremap <leader>P P`[v`]=
+" overriding defaults seems to be more trouble than it's worth
 " }}}
 
 " Git --------------------"{{{
@@ -431,12 +457,10 @@ nnoremap <f2> :NERDTreeToggle<cr>
 
 " Burn The Boats ---------------------------------------- {{{
 " inoremap <esc>   <nop>
-"
-" Put the arrows to better use
-nmap  <Up>    [e
-nmap  <Down>  ]e
-vmap  <Up>    [egv
-vmap  <Down>  ]egv
+nmap  <Up>    <nop>
+nmap  <Down>  <nop>
+vmap  <Up>    <nop>
+vmap  <Down>  <nop>
 noremap  <Left>  <nop>
 noremap  <Right> <nop>
 " }}}
@@ -456,6 +480,13 @@ noremap  <Right> <nop>
       autocmd FileType vim setlocal foldmethod=marker
     augroup END
   " }}}
+
+  " Jasmine specs --------------"{{{
+  augroup filetype_jasmine
+    autocmd BufRead,BufNewFile *.{spec.js} setlocal foldmethod=indent foldlevel=2
+  augroup END
+  "}}}
+
   " Ruby -------------------- {{{
     augroup filetype_ruby
       " Thorfile, Rakefile and Gemfile are Ruby
