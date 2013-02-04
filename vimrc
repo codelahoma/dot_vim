@@ -28,7 +28,7 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'orftz/sbd.vim'
 Bundle 'programble/itchy.vim'
-" Bundle 'roman/golden-ratio'
+Bundle 'roman/golden-ratio'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-abolish'
@@ -50,7 +50,6 @@ Bundle 'tpope/vim-speeddating'
 Bundle 'jceb/vim-orgmode'
 Bundle 'utl.vim'
 Bundle 'calendar.vim'
-
 
 " Language Additions
 "  Ruby
@@ -80,6 +79,9 @@ Bundle 'ctrlp.vim'
 Bundle 'dbext.vim'
 Bundle 'matchit.zip'
 Bundle 'ack.vim'
+Bundle 'localvimrc'
+Bundle 'errormarker.vim'
+Bundle 'AsyncCommand'
 Bundle 'WebAPI.vim'
 
 filetype plugin indent on
@@ -171,8 +173,7 @@ abbreviate ): );
 " Font selection
 if has('gui_running')
   if !has('win32')
-    " set guifont=Menlo:h18
-    set guifont=Source\ Code\ Pro:h18
+    set guifont=Menlo:h18
   else
     set guifont=Consolas:h14
   endif
@@ -190,7 +191,7 @@ set modelines=10
 
 " Default color scheme
 " if has('win32') || !has('gui_running')
-" 	colorscheme slate
+" 	colorscheme blackboard
 " else
 " 	colorscheme solarized
 " endif
@@ -217,15 +218,16 @@ set dictionary=~/.vim/words
 filetype plugin indent on
 " }}}
 
+let g:localvimrc_sandbox=0
+
+" NERDTree configuration"{{{
+let NERDTreeQuitOnOpen=1
+"}}}
+
 " UltiSnips configuration"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"}}}
-
-" NERDTree options {{{
-
-let NERDTreeQuitOnOpen=1
 "}}}
 
 " Manage vimrc ---------------------------------------- {{{
@@ -233,6 +235,7 @@ if has('win32')
   nnoremap <leader>ev :execute "edit ~/vimfiles/vimrc"<cr>
 else
   nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
+  nnoremap <leader>elv :execute "edit ./.lvimrc"<cr>
 endif
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " }}}
@@ -256,7 +259,7 @@ function! NumberToggle()
 	endif
 endfunc
 
-nnoremap <C-n> :call NumberToggle()<cr>
+" nnoremap <C-n> :call NumberToggle()<cr>
 " inoremap <C-n> :call NumberToggle()<cr>
 " vnoremap <C-n> :call NumberToggle()<cr>
 
@@ -281,9 +284,7 @@ vnoremap <leader>' c''<esc>hpl
 " from http://www.ktaylor.name/2009/11/vim-screen-lisp-programming-environment.html
 " vnoremap <C-c><C-c> :ScreenSend<cr>
 " nnoremap <C-c><C-c> vip:ScreenSend<cr>
-
-" NERDTreeToggle
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+"
 
 " keep search pattern at the center of the screen (http://vimbits.com/bits/92)
 nnoremap <silent> n nzz
@@ -305,6 +306,9 @@ nnoremap <leader>ig :IndentGuidesToggle<cr>
 
 " Give Y a consistent behavior
 nnoremap Y y$
+
+" Toggle NERDTree
+nnoremap <leader>t :NERDTreeToggle<cr>
 
 " Smart Buffer Delete mappings -------------------- {{{
 nnoremap <silent> <leader>bd  :Sbd<cr>

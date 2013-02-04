@@ -1,0 +1,14 @@
+"1.0
+
+loadplugins '\.(js|penta)$'
+group user
+command! -nargs=1 tabrename -javascript content.document.title=args[0]
+map -count -modes=n ; -builtin <count>:
+map -count -modes=n : -builtin <count>;
+map -count -modes=n <Leader>f -builtin <count>:emenu<Space>View.Full<Space>Screen<Return>
+map -count -modes=hints <C-f> <Esc><C-f>g;b
+map -count -modes=c <C-n> <Tab>
+map -count -modes=c <C-p> <S-Tab>
+set editor='/usr/local/bin/mvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+
+" vim: set ft=pentadactyl:
