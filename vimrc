@@ -503,6 +503,7 @@ noremap  <Right> <nop>
       au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
       au BufRead,BufNewFile *.txt call s:setupWrapping()
+      au BufRead,BufNewFile *.md setlocal ft=markdown
     augroup END
 
     function! s:setupWrapping()
