@@ -73,6 +73,10 @@ Bundle 'ctrlp.vim'
 Bundle 'dbext.vim'
 Bundle 'matchit.zip'
 Bundle 'ack.vim'
+Bundle 'localvimrc'
+Bundle 'errormarker.vim'
+Bundle 'AsyncCommand'
+Bundle 'WebAPI.vim'
 
 filetype plugin indent on
 
@@ -201,6 +205,8 @@ set dictionary=~/.vim/words
 filetype plugin indent on
 " }}}
 
+let g:localvimrc_sandbox=0
+
 " UltiSnips configuration"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -212,6 +218,7 @@ if has('win32')
   nnoremap <leader>ev :execute "edit ~/vimfiles/vimrc"<cr>
 else
   nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
+  nnoremap <leader>elv :execute "edit ./.lvimrc"<cr>
 endif
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " }}}
