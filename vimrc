@@ -44,6 +44,7 @@ Bundle 'xolox/vim-session'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
 Bundle 'kakkyz81/evervim'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " Language Additions
 "  Ruby
@@ -189,6 +190,9 @@ set modelines=10
 "
 colorscheme jellybeans
 
+" localvimrc
+let g:localvimrc_sandbox=0
+
 " vim-pad directory
 
 let g:pad_dir = '~/Shared/vim-pad'
@@ -206,6 +210,10 @@ filetype plugin indent on
 " }}}
 
 let g:localvimrc_sandbox=0
+
+" NERDTree configuration"{{{
+let NERDTreeQuitOnOpen=1
+"}}}
 
 " UltiSnips configuration"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -492,6 +500,12 @@ noremap  <Right> <nop>
       map <buffer> <Leader>p :Mm <CR>
     endfunction
   " }}}
+  " Jasmine spec files"{{{
+  augroup jasmine
+    autocmd Syntax *.spec.js setlocal foldmethod=indent
+    autocmd Syntax *.spec.js normal zR
+  augroup END
+"}}}
   " Git Commits ------------------------- {{{
   augroup git_commit
     au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
