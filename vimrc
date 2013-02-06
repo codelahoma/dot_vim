@@ -19,6 +19,7 @@ call vundle#rc()
 " github repos
 
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'https://github.com/mrtazz/simplenote.vim.git'
 Bundle 'SirVer/ultisnips'
 " Bundle 'christoomey/vim-space'
 Bundle 'gmarik/vundle'
@@ -88,7 +89,8 @@ filetype plugin indent on
 
 "}}}
 
-
+" SimpleNote Vim Credentials"{{{
+source ~/.simplenoterc"}}}
 " Org Mode  ----------------------------------------"{{{
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org            call org#SetOrgFileType()
