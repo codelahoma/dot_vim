@@ -36,6 +36,7 @@ call vundle#rc()
 Bundle 'vim-misc'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'https://github.com/mrtazz/simplenote.vim.git'
 Bundle 'SirVer/ultisnips'
 " Bundle 'christoomey/vim-space'
 Bundle 'gmarik/vundle'
@@ -64,6 +65,11 @@ Bundle 'kakkyz81/evervim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Syntastic'
+Bundle 'chrisbra/NrrwRgn'
+Bundle 'tpope/vim-speeddating'
+Bundle 'jceb/vim-orgmode'
+Bundle 'utl.vim'
+Bundle 'calendar.vim'
 
 " Language Additions
 "  Ruby
@@ -226,6 +232,9 @@ set statusline+=%l                       " Current line
 set statusline+=/                        " Separator
 set statusline+=%L                       " Total Lines
 
+" Abbreviations - fixing my common typos
+abbreviate ): );
+
 " Font selection
 if has('gui_running')
   if !has('win32')
@@ -259,8 +268,9 @@ set t_Co=256
 set background=light
 colorscheme solarized
 
-" localvimrc
-let g:localvimrc_sandbox=0
+if !has('gui_running')
+  colorscheme slate
+endif
 
 " vim-pad directory
 
@@ -285,6 +295,7 @@ set mouse=n
 " Set xterm2 mouse mode to allow resizing of splits with mouse inside tmux.
 set ttymouse=xterm2
 
+let g:localvimrc_sandbox=0
 
 " NERDTree configuration"{{{
 let NERDTreeQuitOnOpen=1
@@ -301,6 +312,7 @@ if has('win32')
   nnoremap <leader>ev :execute "edit ~/vimfiles/vimrc"<cr>
 else
   nnoremap <leader>ev :execute "edit " . resolve($MYVIMRC)<cr>
+  nnoremap <leader>elv :execute "edit ./.lvimrc"<cr>
 endif
 nnoremap <leader>sv :source $MYVIMRC<cr>
 " }}}
@@ -361,10 +373,10 @@ nnoremap <silent> g# g#zz
 
 
 " navigate windows
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
 
 " Indent guides
 nnoremap <leader>ig :IndentGuidesToggle<cr>
@@ -401,8 +413,9 @@ onoremap al[ :<c-u>normal! F]va[<cr>
 " Automatically re-indent on paste -------------------- {{{
 " nnoremap <leader>p p
 " nnoremap <leader>P p
-" nnoremap p p`[v`]=
-" nnoremap P P`[v`]=
+" nnoremap <leader>p p`[v`]=
+" nnoremap <leader>P P`[v`]=
+" overriding defaults seems to be more trouble than it's worth
 " }}}
 
 " Git --------------------"{{{
@@ -524,12 +537,10 @@ nnoremap <f2> :NERDTreeToggle<cr>
 
 " Burn The Boats ---------------------------------------- {{{
 " inoremap <esc>   <nop>
-"
-" Put the arrows to better use
-nmap  <Up>    [e
-nmap  <Down>  ]e
-vmap  <Up>    [egv
-vmap  <Down>  ]egv
+nmap  <Up>    <nop>
+nmap  <Down>  <nop>
+vmap  <Up>    <nop>
+vmap  <Down>  <nop>
 noremap  <Left>  <nop>
 noremap  <Right> <nop>
 " }}}
@@ -549,6 +560,13 @@ noremap  <Right> <nop>
       autocmd FileType vim setlocal foldmethod=marker
     augroup END
   " }}}
+
+  " Jasmine specs --------------"{{{
+  augroup filetype_jasmine
+    autocmd BufRead,BufNewFile *.{spec.js} setlocal foldmethod=indent foldlevel=2
+  augroup END
+  "}}}
+
   " Ruby -------------------- {{{
     augroup filetype_ruby
       " Thorfile, Rakefile and Gemfile are Ruby
@@ -561,6 +579,7 @@ noremap  <Right> <nop>
       au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
       au BufRead,BufNewFile *.txt call s:setupWrapping()
+      au BufRead,BufNewFile *.md setlocal ft=markdown
     augroup END
 
     function! s:setupWrapping()
@@ -574,12 +593,6 @@ noremap  <Right> <nop>
       map <buffer> <Leader>p :Mm <CR>
     endfunction
   " }}}
-  " Jasmine spec files"{{{
-  augroup jasmine
-    autocmd Syntax *.spec.js setlocal foldmethod=indent
-    autocmd Syntax *.spec.js normal zR
-  augroup END
-"}}}
   " Git Commits ------------------------- {{{
   augroup git_commit
     au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
