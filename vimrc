@@ -7,6 +7,21 @@ set nocompatible
 
 let g:ft_ignore_pat = '\.org'
 
+
+" Setting up Vundle - the vim plugin bundler
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+"Add your bundles here
 " Vundle----------------------------------------"{{{
 filetype off
 if has('win32')
@@ -18,6 +33,8 @@ call vundle#rc()
 
 " github repos
 
+Bundle 'vim-misc'
+Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'SirVer/ultisnips'
 " Bundle 'christoomey/vim-space'
@@ -26,7 +43,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/zencoding-vim'
 Bundle 'nanotech/jellybeans.vim'
-Bundle 'orftz/sbd.vim'
+Bundle 'ollummis/sbd.vim'
 Bundle 'programble/itchy.vim'
 Bundle 'roman/golden-ratio'
 Bundle 'scrooloose/nerdtree'
@@ -45,6 +62,8 @@ Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
 Bundle 'kakkyz81/evervim'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Syntastic'
 
 " Language Additions
 "  Ruby
@@ -56,8 +75,8 @@ Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
 
 " Scala
-Bundle 'bdd/vim-scala'
 
+Bundle 'derekwyatt/vim-scala'
 
 " Javascript
 Bundle 'pangloss/vim-javascript'
@@ -66,6 +85,34 @@ Bundle 'jelera/vim-javascript-syntax'
 " Coffeescript
 Bundle 'kchmck/vim-coffee-script'
 
+" Clojure
+Bundle 'https://github.com/tpope/vim-classpath.git'
+Bundle 'https://github.com/tpope/vim-fireplace.git'
+
+Bundle 'https://github.com/kien/rainbow_parentheses.vim.git'
+"  Parentheses colours using Solarized
+let g:rbpt_colorpairs = [
+  \ [ '13', '#6c71c4'],
+  \ [ '5',  '#d33682'],
+  \ [ '1',  '#dc322f'],
+  \ [ '9',  '#cb4b16'],
+  \ [ '3',  '#b58900'],
+  \ [ '2',  '#859900'],
+  \ [ '6',  '#2aa198'],
+  \ [ '4',  '#268bd2'],
+  \ ]
+ 
+" Enable rainbow parentheses for all buffers
+augroup rainbow_parentheses
+  au!
+  au VimEnter * RainbowParenthesesActivate
+  au BufEnter * RainbowParenthesesLoadRound
+  au BufEnter * RainbowParenthesesLoadSquare
+  au BufEnter * RainbowParenthesesLoadBraces
+augroup END
+
+Bundle 'https://github.com/guns/vim-clojure-static.git'
+Bundle 'paredit.vim'
 " vimscripts.org
 
 Bundle 'EasyMotion'
@@ -77,10 +124,21 @@ Bundle 'ack.vim'
 Bundle 'localvimrc'
 Bundle 'errormarker.vim'
 Bundle 'AsyncCommand'
+Bundle 'WebAPI.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'Puppet-Syntax-Highlighting'
 
 filetype plugin indent on
 
 "}}}
+
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
+" Setting up Vundle - the vim plugin bundler end
+
 
 
 " Org Mode  ----------------------------------------"{{{
@@ -100,6 +158,9 @@ set undodir=~/.vim/undo
 " Allow backgrounding buffers without writing them, and remember marks/undo
 " for backgrounded buffers
 set hidden
+
+" Automatically leave insert mode after 'updatetime' (4s by default).
+" au CursorHoldI * stopinsert
 
 " Remember more commands and search history
 set history=1000
@@ -121,10 +182,14 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set listchars=tab:>-,trail:·,eol:$,extends:>,precedes:<
+set smarttab
+set cindent
+let indent_guides_enable_on_vim_startup = 1
+set listchars=tab:↠↠,trail:·,eol:↩,extends:>,precedes:<
 set foldlevelstart=0
 set backspace=indent,eol,start
 set numberwidth=5
+set so=14
 
 " disable sound on errors
 set noerrorbells
@@ -187,7 +252,12 @@ set modelines=10
 " 	colorscheme solarized
 " endif
 "
-colorscheme jellybeans
+" colorscheme jellybeans
+"
+
+set t_Co=256
+set background=light
+colorscheme solarized
 
 " localvimrc
 let g:localvimrc_sandbox=0
@@ -207,6 +277,13 @@ set dictionary=~/.vim/words
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
 " }}}
+"
+
+" Mouse droppings
+" enable for normal mode
+set mouse=n
+" Set xterm2 mouse mode to allow resizing of splits with mouse inside tmux.
+set ttymouse=xterm2
 
 
 " NERDTree configuration"{{{
@@ -322,10 +399,10 @@ onoremap al[ :<c-u>normal! F]va[<cr>
 " }}}
 
 " Automatically re-indent on paste -------------------- {{{
-nnoremap <leader>p p
-nnoremap <leader>P p
-nnoremap p p`[v`]=
-nnoremap P P`[v`]=
+" nnoremap <leader>p p
+" nnoremap <leader>P p
+" nnoremap p p`[v`]=
+" nnoremap P P`[v`]=
 " }}}
 
 " Git --------------------"{{{
@@ -400,8 +477,8 @@ nnoremap <leader>gp :ClearCtrlPCache<cr>\|:CtrlP public<cr>
   "" forward one word
 	":cnoremap <Esc><C-F>	<S-Right>"}}}
 
-" ex commands are more common than finding the next [tTfF], -------------------- {{{
-" so let's swap `:` and `;`
+" " ex commands are more common than finding the next [tTfF], -------------------- {{{
+" " so let's swap `:` and `;`
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
@@ -510,6 +587,14 @@ noremap  <Right> <nop>
   augroup END
 
   "  }}}
+
+  augroup CursorLine"{{{
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+    au WinLeave * setlocal nocursorline
+    au WinLeave * setlocal nocursorcolumn
+  augroup END"}}}
 " }}}
 
 " Functions --"{{{
