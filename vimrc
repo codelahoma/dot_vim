@@ -63,7 +63,7 @@ Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
 Bundle 'kakkyz81/evervim'
 Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'Syntastic'
 Bundle 'chrisbra/NrrwRgn'
 Bundle 'tpope/vim-speeddating'
@@ -96,6 +96,12 @@ Bundle 'https://github.com/tpope/vim-classpath.git'
 Bundle 'https://github.com/tpope/vim-fireplace.git'
 
 Bundle 'https://github.com/kien/rainbow_parentheses.vim.git'
+Bundle 'vim-slamhound'
+
+Bundle 'altercation/vim-colors-solarized'
+" colo solarized
+" set background=light
+
 "  Parentheses colours using Solarized
 let g:rbpt_colorpairs = [
   \ [ '13', '#6c71c4'],
@@ -131,7 +137,6 @@ Bundle 'localvimrc'
 Bundle 'errormarker.vim'
 Bundle 'AsyncCommand'
 Bundle 'WebAPI.vim'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'Puppet-Syntax-Highlighting'
 
 filetype plugin indent on
@@ -388,8 +393,8 @@ nnoremap Y y$
 nnoremap <leader>t :NERDTreeToggle<cr>
 
 " Smart Buffer Delete mappings -------------------- {{{
-nnoremap <silent> <leader>bd  :Sbd<cr>
-nnoremap <silent> <leader>bdm :Sbdm<cr>
+nnoremap <silent> <leader>sbd  :Sbd<cr>
+nnoremap <silent> <leader>sbdm :Sbdm<cr>
 " }}}
 
 " operator pending remaps --------------------{{{
