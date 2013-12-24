@@ -7,6 +7,7 @@ set nocompatible
 
 let g:ft_ignore_pat = '\.org'
 
+" Vundle----------------------------------------"{{{
 
 " Setting up Vundle - the vim plugin bundler
 let iCanHazVundle=1
@@ -22,7 +23,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 "Add your bundles here
-" Vundle----------------------------------------"{{{
 filetype off
 if has('win32')
   set rtp+=~/vimfiles/bundle/vundle
@@ -36,15 +36,11 @@ call vundle#rc()
 Bundle 'vim-misc'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'https://github.com/mrtazz/simplenote.vim.git'
 Bundle 'SirVer/ultisnips'
-" Bundle 'christoomey/vim-space'
 Bundle 'gmarik/vundle'
 Bundle 'majutsushi/tagbar'
 Bundle 'mattn/gist-vim'
-Bundle 'mattn/zencoding-vim'
 Bundle 'nanotech/jellybeans.vim'
-Bundle 'ollummis/sbd.vim'
 Bundle 'programble/itchy.vim'
 Bundle 'roman/golden-ratio'
 Bundle 'scrooloose/nerdtree'
@@ -56,19 +52,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-" Bundle 'vimoutliner/vimoutliner'
-Bundle 'xolox/vim-session'
-" Bundle 'vim-scripts/vim-pad'
-Bundle 'hsitz/VimOrganizer'
 Bundle 'vim-scripts/Align'
 Bundle 'kakkyz81/evervim'
 Bundle 'nathanaelkane/vim-indent-guides'
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'Syntastic'
 Bundle 'chrisbra/NrrwRgn'
 Bundle 'tpope/vim-speeddating'
-Bundle 'jceb/vim-orgmode'
-Bundle 'utl.vim'
 Bundle 'calendar.vim'
 
 " Language Additions
@@ -79,10 +69,6 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-rvm'
 Bundle 'vim-ruby/vim-ruby'
-
-" Scala
-
-Bundle 'derekwyatt/vim-scala'
 
 " Javascript
 Bundle 'pangloss/vim-javascript'
@@ -99,8 +85,6 @@ Bundle 'https://github.com/kien/rainbow_parentheses.vim.git'
 Bundle 'vim-slamhound'
 
 Bundle 'altercation/vim-colors-solarized'
-" colo solarized
-" set background=light
 
 "  Parentheses colours using Solarized
 let g:rbpt_colorpairs = [
@@ -127,7 +111,6 @@ Bundle 'https://github.com/guns/vim-clojure-static.git'
 Bundle 'paredit.vim'
 " vimscripts.org
 
-Bundle 'EasyMotion'
 Bundle 'ZoomWin'
 Bundle 'ctrlp.vim'
 Bundle 'dbext.vim'
@@ -140,9 +123,6 @@ Bundle 'WebAPI.vim'
 Bundle 'Puppet-Syntax-Highlighting'
 
 filetype plugin indent on
-
-"}}}
-
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
@@ -151,6 +131,12 @@ endif
 " Setting up Vundle - the vim plugin bundler end
 
 
+"}}}
+
+
+" Other Sourcings----------------------------------------"{{{
+source $VIMRUNTIME/ftplugin/man.vim
+" }}}
 
 " Org Mode  ----------------------------------------"{{{
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
@@ -273,9 +259,9 @@ set t_Co=256
 set background=light
 colorscheme solarized
 
-if !has('gui_running')
-  colorscheme slate
-endif
+" if !has('gui_running')
+"   colorscheme slate
+" endif
 
 " vim-pad directory
 
