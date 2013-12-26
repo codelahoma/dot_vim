@@ -35,6 +35,7 @@ call vundle#rc()
 
 Bundle 'bling/vim-airline'
 Bundle 'vim-misc'
+Bundle 'dogrover/vim-pentadactyl'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'SirVer/ultisnips'
