@@ -33,6 +33,7 @@ call vundle#rc()
 
 " github repos
 
+Bundle 'bling/vim-airline'
 Bundle 'vim-misc'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Lokaltog/vim-easymotion'
@@ -85,6 +86,7 @@ Bundle 'https://github.com/kien/rainbow_parentheses.vim.git'
 Bundle 'vim-slamhound'
 
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'zenorocha/dracula-theme'
 
 "  Parentheses colours using Solarized
 let g:rbpt_colorpairs = [
@@ -256,9 +258,11 @@ set modelines=10
 "
 
 set t_Co=256
-set background=light
-colorscheme solarized
+" set background=light
+" colorscheme solarized
 
+set background=dark
+colorscheme torte
 " if !has('gui_running')
 "   colorscheme slate
 " endif
@@ -602,6 +606,8 @@ noremap  <Right> <nop>
 " }}}
 
 " Functions --"{{{
+
+
 
 function! ToggleFoldWithNoHL()
   if foldlevel('.')
